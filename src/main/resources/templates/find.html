@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天眼查工商数据搜索</title>
+    <link rel="stylesheet" href="../static/css/abc.css">
+    <link rel="stylesheet" href="../static/css/color.css">
+    <link rel="stylesheet" href="../static/css/layer/layui.css" media="all">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+	#word{
+		position: absolute;
+		z-index: 99;
+		width: 612px;
+		height: auto;
+		background-color: white;
+		border: black solid 1px;
+		display: none;
+	}
+	.click_work{
+
+		font-weight:900;
+		font-size: 13px;
+		cursor:pointer;/*鼠标放上变成小手*/
+		padding-bottom: 5px;
+        padding-top: 5px;
+        padding-left: 10px;
+        text-align: left;
+	}
+	.click_work:hover{
+		color: orange;
+		background-color: gray;
+	}
+	.error{
+		color: gray;
+		cursor:pointer;/*鼠标放上变成小手*/
+	}
+</style>
+</head>
+<body>
+<br/>
+<h1 align="center" style="color: cornflowerblue;font-size: 30px;font-weight: bold">天眼查工商数据搜索</h1>
+<br/>
+<div style="width:100%;text-align:center">
+   <!-- <input id="company_name"  placeholder="请填入查询公司" name="company" style="background-size: auto;width: 600px;height: 40px"/>&nbsp;&nbsp;
+    <button type="button" onclick="find()" class="layui-btn layui-btn-lg">搜索</button>-->
+
+    <table align="center" cellspacing="0" cellpadding="10" border="0" >
+        <tr>
+            <td style="position: relative;">
+                <input id="company_name" type="text" placeholder="请填入查询公司"  style="background-size: auto;width: 600px;height: 40px;    padding-left: 10px;">
+                <button  type="button" onclick="find()" class="layui-btn layui-btn-lg">搜索</button>
+                <div id="word"></div>
+            </td>
+        </tr>
+    </table>
+
+
+    <!--<button type="button" onclick="find()"-->
+      <!--style="background-color: #66CCFF;border: none;color: white;padding: 8px 15px;text-align: center;text-decoration: none;-->
+      <!--display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;"><b>搜索</b></button>-->
+</div>
+<br/><br/>
+<div id="com_name" class="com_name">安徽皖维高新材料股份有限公司（示例）</div>
+<br/>
+<div class="base_info">
+    <div class="subtitle">公司基本信息</div>
+        <div id="base_info">
+        <p id="base_name" style="margin-left:20px">安徽皖维高新材料股份有限公司</p><br/>
+        <div class="one">
+            股票代码：<span id="stockCode">---</span>
+        </div>
+        <br/><br/>
+        <div class="three">
+            电话： <span id="telephone">82189740</span>
+        </div>
+        <div class="four">
+            公司网址： <span id="website">http://qyxy.baic.gov.cn/</span>
+        </div>
+        <br/>
+        <div class="three">
+            邮箱： <span id="email">wwgs82189209@163.com</span>
+        </div>
+        <div class="four">
+            注册地址： <span id="registerAdress">安徽省巢湖市皖维路56号</span>
+        </div>
+        <br/>
+        <div class="abstract">
+            <div class="name">经营范围：</div>
+            <div id="base_text" class="text">
+                许可经营项目：水泥用石灰石开采，氧气、溶解乙炔、醋酸乙烯、电石、工业乙酸酐、工业冰乙酸、乙醛、醋酸甲酯的生产和销售（只限于在生产厂区范围内销售本企业生产的上述产品）。 一般经营项目：各种高低聚合度和醇解度的PVA系列产品、高强高模聚乙烯醇纤维、超高强高模PVA短纤及长丝、PVA水溶性纤维、聚乙烯醇薄膜、PVB树脂、可再分散性乳胶粉、粘合剂用相关产品、聚乙烯醇强力纱、涤纶纤维、聚脂切片、聚醋酸乙烯乳液、高档面料、水泥、石灰制造、销售，工业与民用建筑工程施工三级（限建筑分公司经营），设备安装，机械加工，铁路轨道衡计量经营；建筑用石料、水泥用混合材、化工产品的生产与销售；自营及代理各类商品和技术的进出口业务（除国家限定企业经营或禁止进出口的商品和技术）（依法须经批准的项目，经相关部门批准后方可开展经营活动）
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
+<br/>
+
+<div class="base_info">
+    <div class="subtitle">工商信息</div>
+    <div id="main_holder">
+        <div class="three">
+            法定代表人： <span id="legalPerson">傅利泉</span>
+        </div>
+        <div class="four">
+            成立时间： <span id="buildTime">1997-05-23 00:00:00</span>
+        </div>
+        <br/>
+        <div class="three">
+            注册资本： <span id="registeredCapital">289875.61</span>万人民币
+        </div>
+        <div class="four">
+            公司状态： <span id="comStatus">存续</span>
+        </div>
+        <br/>
+        <div class="three">
+            实收资本： <span id="realCapital">---</span>
+        </div>
+        <div class="four">
+            企业性质： <span id="comNature">非以上所述类别其他</span>
+        </div>
+        <br/>
+        <div class="three">
+            大股东持股比例： <span id="proportion">38.68%</span>
+        </div>
+        <div class="four">
+            第一大股东： <span id="shareholder">傅利泉</span>
+        </div>
+
+        <br/>
+        <!--<div class="three">-->
+            <!--实际控制人： <span id="realManger">陈爱玲</span>-->
+        <!--</div>-->
+        <br/><br/>
+    </div>
+</div>
+<br/>
+
+<div class="base_info">
+    <div class="subtitle">股东信息</div>
+    <div style="margin-left:30px;margin-right: 30px">
+        <table id="shareholderInfo" lay-filter="test"></table>
+        <br/>
+    </div>
+</div>
+
+<br/>
+<div class="base_info">
+    <div class="subtitle">高管信息</div>
+    <div style="margin-left:30px;margin-right: 30px">
+        <table id="executiveInformation" lay-filter="test"></table>
+        <br/>
+    </div>
+</div>
+
+<br/>
+<div class="base_info">
+    <div class="subtitle">对外投资</div>
+    <div style="margin-left:30px;margin-right: 30px">
+        <table id="outboundInvestment" lay-filter="test"></table>
+        <br/>
+    </div>
+</div>
+
+<br/>
+<div class="base_info">
+    <div class="subtitle">变更记录</div>
+    <div style="margin-left:30px;margin-right: 30px">
+        <table id="changeRecord" lay-filter="test"></table>
+        <br/>
+    </div>
+</div>
+
+<br/>
+<div class="base_info">
+    <div class="subtitle">行政处罚</div>
+    <div style="margin-left:30px;margin-right: 30px">
+        <table id="punishment" lay-filter="test"></table>
+        <br/>
+    </div>
+</div>
+<br/>
+
+<div class="base_info">
+    <div class="subtitle">法律诉讼</div>
+    <div style="margin-left:30px;margin-right: 30px">
+        <table id="lawsuit" lay-filter="test"></table>
+        <br/>
+    </div>
+</div>
+<br/>
+
+</body>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取Json数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/layer/layui.js"></script>
+<script src="../static/js/interface.js"></script>
+<script type="text/javascript" src="../static/js/abc.js"></script>
+<script type="text/javascript" src="../static/js/company_name_suggest.js"></script>
+
+
+</html>
