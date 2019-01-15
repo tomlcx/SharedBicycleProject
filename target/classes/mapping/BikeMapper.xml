@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.tyc.mapper.BikeMapper">
+
+    <insert id="insertPerson" parameterType="com.abc.tyc.entity.Person">
+    insert into person (id, username, password,role,createtime)
+    values
+    (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{role,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+    <select id="selectPersonByUsername" resultType="com.abc.tyc.entity.Person" >
+        select id as id , username as username
+        from person
+        where username=#{param1}
+    </select>
+
+</mapper>

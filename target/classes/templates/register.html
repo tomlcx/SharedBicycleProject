@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Carbon - Admin Template</title>
     <link rel="stylesheet" href="../static/vendor/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="../static/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="../static/css/styles.css">
+    <style type="text/css">
+        .loading-row {
+            padding: 0px 0px 25px 150px;
+        }
+    </style>
 </head>
 <body>
 <div class="page-wrapper flex-row align-items-center">
@@ -16,33 +22,29 @@
             <div class="col-md-5">
                 <div class="card p-4">
                     <div class="card-header text-center text-uppercase h4 font-weight-light">
-                        Register
+                        注册
                     </div>
 
                     <div class="card-body py-5">
                         <div class="form-group">
-                            <label class="form-control-label">Name</label>
-                            <input type="name" class="form-control">
+                            <label class="form-control-label">用户名</label>
+                            <input id="username" type="name" class="form-control">
                         </div>
-
                         <div class="form-group">
-                            <label class="form-control-label">Email</label>
-                            <input type="email" class="form-control">
+                            <label class="form-control-label">密码</label>
+                            <input id="password" type="password" class="form-control">
                         </div>
-
-                        <div class="form-group">
-                            <label class="form-control-label">Password</label>
-                            <input type="password" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-control-label">Confirm Password</label>
-                            <input type="password" class="form-control">
+                        <div id="roleSelect" style="padding-top: 10px">
+                            <label><input name="Role" type="radio" value="1" checked="checked"/>用户 </label>
+                            <label><input name="Role" type="radio" value="2"/>管理员 </label>
+                            <label><input name="Role" type="radio" value="3"/>维修员 </label>
                         </div>
                     </div>
-
+                    <div class="loading-row">
+                        <span id="msg" class="text" style="    color: #ddd;font-size: 20px;"></span>
+                    </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success btn-block">Create Account</button>
+                        <button type="submit" class="btn btn-success btn-block" onclick="register()">创建用户</button>
                     </div>
                 </div>
             </div>
@@ -55,5 +57,39 @@
 <script src="../static/vendor/chart.js/chart.min.js"></script>
 <script src="../static/js/carbon.js"></script>
 <script src="../static/js/demo.js"></script>
+<script>
+    function register() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var select = document.getElementsByName("Role");
+        for (var i = 0; i < select.length; i++) {
+            if (select[i].checked) {
+                var role = select[i].value;
+            }
+        }
+
+        var data = {
+            username: username,
+            password: password,
+            role: role
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/data/insertPerson",
+            data: JSON.stringify(data),
+            datatype: "json",
+            contentType: "application/json",
+            success: function () {
+                document.getElementById("msg").innerText = "注册成功";
+            },
+            error: function () {
+                alert(1);
+                document.getElementById("msg").innerText = "用户名重复";
+            }
+        });
+    }
+
+</script>
 </body>
 </html>
